@@ -9,7 +9,7 @@ import ru.addressbook.appManager.ApplicationManager;
  */
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager();
+    public final ApplicationManager app = new ApplicationManager();
 
     @AfterMethod
     public void tearDown() {

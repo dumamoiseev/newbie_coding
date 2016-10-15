@@ -36,7 +36,7 @@ public class ContactAndGroupHelper extends HelperBase {
     }
 
     public void initGroupCreation() {
-        click(By.name("group_name"));
+        click(By.name("new"));
     }
 
     public void fillFormContact(contactData contactData) {
@@ -56,5 +56,42 @@ public class ContactAndGroupHelper extends HelperBase {
 
     public void initCreationContact() {
         click(By.linkText("add new"));
+    }
+
+    public void initGroupModification() {
+        click(By.name("edit"));
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
+    }
+
+    public void initDeleteContact() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void ContactPage() {
+        click(By.linkText("home"));
+    }
+
+    public void confirmDeleteContact() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
+
+
+    public void acceptDeleteContact() {
+        wd.switchTo().alert().accept();
+    }
+
+    public void pickToEditContact() {
+        click(By.xpath("//tr[@class='odd']/td[8]/a/img"));
+    }
+
+    public void confirmEditingContact() {
+        click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 }

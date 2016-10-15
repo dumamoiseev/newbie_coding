@@ -14,7 +14,7 @@ public class NavagationHelper extends HelperBase {
     }
 
     public void gotoPageGroup() {
-        wd.findElement(By.name("new")).click();
+        wd.findElement(By.name("groups")).click();
     }
 
     public void gotoHomePage() {
