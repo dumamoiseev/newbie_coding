@@ -1,6 +1,7 @@
 package ru.addressbook.appManager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.addressbook.model.contactData;
 import ru.addressbook.model.dataGroup;
@@ -10,7 +11,8 @@ import ru.addressbook.model.dataGroup;
  */
 public class ContactAndGroupHelper extends HelperBase {
 
-    public ContactAndGroupHelper(FirefoxDriver wd) {
+    public ContactAndGroupHelper(WebDriver wd)
+    {
         super(wd);
     }
 

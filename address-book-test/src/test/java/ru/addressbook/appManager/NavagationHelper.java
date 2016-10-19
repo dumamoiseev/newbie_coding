@@ -1,6 +1,7 @@
 package ru.addressbook.appManager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
@@ -8,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  */
 public class NavagationHelper extends HelperBase {
 
-    public NavagationHelper(FirefoxDriver wd) {
+    public NavagationHelper(WebDriver wd) {
 
        super(wd);
     }
