@@ -10,7 +10,7 @@ import ru.addressbook.appManager.ApplicationManager;
  */
 public class TestBase {
 
-    public final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    public final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
 
     @AfterMethod
     public void tearDown() {

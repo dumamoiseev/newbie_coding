@@ -1,8 +1,10 @@
 package ru.addressbook.appManager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.addressbook.model.contactData;
 import ru.addressbook.model.dataGroup;
 
@@ -41,7 +43,7 @@ public class ContactAndGroupHelper extends HelperBase {
         click(By.name("new"));
     }
 
-    public void fillFormContact(contactData contactData) {
+    public void fillFormContact(contactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getName());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getSecondname());
@@ -50,6 +52,13 @@ public class ContactAndGroupHelper extends HelperBase {
         type(By.name("address"), contactData.getAddress());
         type(By.name("home"), contactData.getPhone());
         type(By.name("email"), contactData.getEmail());
+
+        if (! creation){  new Select(wd.findElement(By.name("new group"))).selectByVisibleText(contactData.getGroup());
+        }
+        else {
+            Assert.assertFalse(isElementPresent(By.name("new group")));
+        }
+
     }
 
     public void submitCreationContact() {
@@ -95,5 +104,16 @@ public class ContactAndGroupHelper extends HelperBase {
 
     public void confirmEditingContact() {
         click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+    }
+
+    public void createContact(contactData contact, boolean b) {
+       initCreationContact();
+       fillFormContact(contact, true);
+       submitCreationContact();
+        //gotoHomePage();
+            }
+
+    public boolean isTherecontact() {
+        return isElementPresent(By.name("Selected[]"));
     }
 }
