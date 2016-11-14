@@ -1,36 +1,77 @@
 package ru.addressbook.model;
 
-public class contactData {
+public class ContactData {
     private int idC= Integer.MAX_VALUE;
-    private final String firstname;
-    private final String middlename;
-    private final String lastname;
-    private final String nickname;
-    private final String companyname;
-    private final String address;
-    private final String phone;
-    private final String email;
+    private  String firstname;
+    private  String middlename;
+    private  String lastname;
+    private  String nickname;
+    private  String companyname;
+    private  String address;
+    private  String phone;
+    private  String email;
     private String group;
 
-    public contactData(int IdC, String firstname, String middlename, String lastname, String nickname, String companyname, String address, String phone, String email, String group) {
-        this.idC = IdC;
+    public ContactData withFirstname(String firstname) {
         this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.nickname = nickname;
-        this.companyname = companyname;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.group = group;
+        return this;
     }
+
+    public ContactData withMiddlename(String middlename) {
+        this.middlename = middlename;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public ContactData withCompanyname(String companyname) {
+        this.companyname = companyname
+        ;return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+    public ContactData withIdC(int idC)
+    {
+        this.idC = idC;
+        return this;
+    }
+    
+    
+
+    
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        contactData that = (contactData) o;
+        ContactData that = (ContactData) o;
 
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
         return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
@@ -43,24 +84,12 @@ public class contactData {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         return result;
     }
-
-    public contactData(String firstname, String middlename, String lastname, String nickname, String companyname, String address, String phone, String email, String group) {
-        this.idC = 0;
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.nickname = nickname;
-        this.companyname = companyname;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.group = group;
+    
+    
+    public int getIdC() {
+        return idC;
     }
-
-
-
-
-
+    
     public String getFirstname() {
         return firstname;
     }
@@ -80,16 +109,7 @@ public class contactData {
     public String getCompanyname() {
         return companyname;
     }
-
-    @Override
-    public String toString() {
-        return "contactData{" +
-                "idC=" + idC +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
-    }
-
+    
     public String getAddress() {
         return address;
     }
@@ -106,11 +126,17 @@ public class contactData {
         return group;
     }
 
-    public void setIdC(int idC) {
-        this.idC = idC;
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "idC=" + idC +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 
-    public int getIdC() {
-        return idC;
+
+    public void setIdC(int idC) {
+        this.idC = idC;
     }
 }

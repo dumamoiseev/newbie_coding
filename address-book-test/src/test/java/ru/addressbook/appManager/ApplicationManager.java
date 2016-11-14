@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.support.events.WebDriverEventListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +19,9 @@ public class ApplicationManager {
     WebDriver wd;
 
     private SessionHelper sessionHelper;
-    private NavagationHelper navagationHelper;
-    private ContactAndGroupHelper groupsHelper;
+    private NavigationHelper navigationHelper;
+    private GroupHelper groupsHelper;
+    private ContactHelper contactsHelper;
     private String browser;
 
     public ApplicationManager(String browser) {
@@ -37,7 +37,16 @@ public class ApplicationManager {
             return false;
         }
     }
+    public GroupHelper group() {
+        return groupsHelper;
+    }
+    public ContactHelper contact() {
+        return contactsHelper;
+    }
 
+    public NavigationHelper goTo() {
+        return navigationHelper;
+    }
     public void stop() {
         wd.quit();
     }
@@ -56,8 +65,9 @@ public class ApplicationManager {
         }
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wd.get("http://localhost:8080/addressbook/group.php");
-        groupsHelper = new ContactAndGroupHelper(wd);
-        navagationHelper = new NavagationHelper(wd);
+        groupsHelper = new GroupHelper(wd);
+        contactsHelper = new ContactHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
@@ -72,11 +82,5 @@ public class ApplicationManager {
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
     }
 
-    public ContactAndGroupHelper getGroupsHelper() {
-        return groupsHelper;
-    }
 
-    public NavagationHelper getNavagationHelper() {
-        return navagationHelper;
-    }
 }
