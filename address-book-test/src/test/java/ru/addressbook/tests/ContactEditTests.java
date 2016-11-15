@@ -29,8 +29,9 @@ public void testEditingContact() {
             .withLastname("123");
     app.contact().EditContact(editedcontact.getIdC(),contact);
     app.contact().ContactPage();
+    Assert.assertEquals(app.contact().count(), before.size());
     Contacts after = app.contact().all();
-    assertEquals(after.size(),before.size());
+
 
 
     before.remove(editedcontact);

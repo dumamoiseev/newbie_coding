@@ -12,7 +12,7 @@ import ru.addressbook.appManager.ApplicationManager;
  */
 public class TestBase {
 
-    public static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+    public static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
     @AfterSuite
     public void tearDown() {

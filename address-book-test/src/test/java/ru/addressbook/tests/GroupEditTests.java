@@ -33,8 +33,8 @@ public void enshurePreconditoin() {
         GroupData editdedGroup = before.iterator().next();
         GroupData group = new GroupData().withId(editdedGroup.getId()).withName("test2");
         app.group().editGroup(group);
+        assertThat(app.group().getGroupCount(),equalTo(before.size()));
         Groups after = app.group().all();
-        assertEquals(after.size(),before.size());
 
         before.remove(editdedGroup);
         before.add(group);
