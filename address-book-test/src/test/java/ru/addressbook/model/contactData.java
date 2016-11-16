@@ -18,6 +18,8 @@ public final class ContactData {
     private  String address;
     private String group;
     private String email;
+    private String  allInfo;
+
 
 
     public ContactData() {
@@ -98,11 +100,17 @@ public final class ContactData {
         return this;
     }
 
+    public ContactData withAllInfo(String allInfo) {
+        this.allInfo = allInfo;
+        return this;
+    }
 
 
-    
 
-    
+
+
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -186,6 +194,10 @@ public final class ContactData {
 
     public String getEmail3() {
         return email3;
+    }
+
+    public String getAllInfo() {
+        return allInfo;
     }
     @Override
     public String toString() {

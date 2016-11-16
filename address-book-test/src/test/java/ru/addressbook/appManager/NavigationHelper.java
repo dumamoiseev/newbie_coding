@@ -20,9 +20,6 @@ public class NavigationHelper extends HelperBase {
 
     public void gotoHomePage()
     {
-        if (isElementPresent(By.id("manintable"))) {
-        return;
-    }
         click(By.linkText("home page"));
     }
 }

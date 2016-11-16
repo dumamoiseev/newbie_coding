@@ -138,11 +138,6 @@ public class ContactHelper extends HelperBase {
         return new Contacts(contactCache);
     }
 
-
-
-
-
-
     public int count() {
         return wd.findElements(By.xpath("//tr[@name = 'entry']")).size();
     }
@@ -176,4 +171,20 @@ public class ContactHelper extends HelperBase {
     public static String cleaned(String phone){
         return phone.replaceAll("\\s", "").replaceAll("[-()]","");
     }
+
+
+
+
+    public void viewAllContactInfoById(int id) {
+            wd.findElement(By.cssSelector("a[href='view.php?id=" + id + "']")).click();
+          }
+
+
+    public ContactData infoFromFullInfoPage(ContactData contact) {
+            viewAllContactInfoById(contact.getIdC());
+            String allInfo = wd.findElement(By.id("content")).getText();
+            wd.navigate().back();
+            return new ContactData().withAllInfo(allInfo);
+          }
+
 }
