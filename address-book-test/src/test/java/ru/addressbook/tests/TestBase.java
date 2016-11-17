@@ -12,7 +12,9 @@ import ru.addressbook.appManager.ApplicationManager;
  */
 public class TestBase {
 
-    public static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    public static final ApplicationManager app
+            = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+
 
     @AfterSuite
     public void tearDown() {

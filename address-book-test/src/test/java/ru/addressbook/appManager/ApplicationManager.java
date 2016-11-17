@@ -8,6 +8,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class ApplicationManager {
+    private final Properties properties;
     WebDriver wd;
 
     private SessionHelper sessionHelper;
@@ -24,8 +30,8 @@ public class ApplicationManager {
     private ContactHelper contactsHelper;
     private String browser;
 
-    public ApplicationManager(String browser) {
-
+    public ApplicationManager(String browser)  {
+        properties = new Properties();
         this.browser = browser;
     }
 
@@ -51,8 +57,9 @@ public class ApplicationManager {
         wd.quit();
     }
 
-    public void init() {
-
+    public void init() throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new  File(String.format("src/test/resources/%s.properties", target))));
         {
             if (browser.equals(BrowserType.FIREFOX)) {
                 wd = new FirefoxDriver();
@@ -64,13 +71,13 @@ public class ApplicationManager {
             }
         }
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        wd.get("http://localhost:8080/addressbook/group.php");
+        wd.get(properties.getProperty("web.baseUrl"));
         groupsHelper = new GroupHelper(wd);
         contactsHelper = new ContactHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
-        sessionHelper.login("admin", "secret");
-    }
+        sessionHelper.login(properties.getProperty("web.adminLogin"),properties.getProperty("web.adminPassword"));
+}
 
     private void login(String username, String password) {
         wd.findElement(By.name("user")).click();

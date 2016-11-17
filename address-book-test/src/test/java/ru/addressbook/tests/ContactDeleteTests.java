@@ -25,7 +25,7 @@ public class ContactDeleteTests extends TestBase {
         ContactData deletedContact = before.iterator().next();
 
         //if (! app.group().isTherecontact()) {
-          //  app.group().createContact(new ContactData("dmitry", "Pavlovich", "Moiseev", null, "Horoshaya", null, "723423424234", "DMITRY.moiseev@pochta.com ", "12312312313289080809"), true);
+          //  app.group().createGroup(new ContactData("dmitry", "Pavlovich", "Moiseev", null, "Horoshaya", null, "723423424234", "DMITRY.moiseev@pochta.com ", "12312312313289080809"), true);
             //app.goTo().gotoHomePage();
             app.contact().deleteContact(deletedContact);
             app.contact().ContactPage();
