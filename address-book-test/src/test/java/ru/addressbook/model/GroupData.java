@@ -18,8 +18,13 @@ public class GroupData {
         return this;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public GroupData withHeader(String header) {
         this.header = header;
+
         return this;
     }
 
