@@ -1,36 +1,37 @@
 package ru.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@XStreamAlias("group")
+@Entity
+@Table(name = "group_list")
 public class GroupData {
 
 
-    private   int id = Integer.MAX_VALUE;;
-    private  String name;
-    private  String header;
+    @XStreamOmitField
+    @Id
+    @Column(name = "group_id")
+    private int id = Integer.MAX_VALUE;
+    @Expose
+    @Column(name = "group_name")
+    private String name;
+    @Expose
+    @Type(type = "text")
+    @Column(name = "group_header")
+    private String header;
+    @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
+    private String footer;
 
-
-    public GroupData withId(int id) {
-        this.id = id;
-        return this;
-    }
-
-    public GroupData withName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public GroupData withHeader(String header) {
-        this.header = header;
-
-        return this;
-    }
-
-    public int getId() {
-        return id;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -39,8 +40,12 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
-        if (id != groupData.id) return false;
-        return name != null ? name.equals(groupData.name) : groupData.name == null;
+        if (id != Integer.MAX_VALUE) {
+            if (id != groupData.id) return false;
+        }
+        if (name != null ? !name.equals(groupData.name) : groupData.name != null) return false;
+        if (header != null ? !header.equals(groupData.header) : groupData.header != null) return false;
+        return footer != null ? footer.equals(groupData.footer) : groupData.footer == null;
 
     }
 
@@ -48,25 +53,17 @@ public class GroupData {
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (header != null ? header.hashCode() : 0);
+        result = 31 * result + (footer != null ? footer.hashCode() : 0);
         return result;
+
     }
-
-
 
 
     @Override
-    public String  toString() {
-        return "GroupData{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+    public String toString() {
+        return "GroupData{";
     }
 
-    public String getParameter1() {
-        return name;
-    }
 
-    public String getParameter2() {
-        return header;
-    }
 }

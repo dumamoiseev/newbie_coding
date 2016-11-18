@@ -29,11 +29,19 @@ public class ApplicationManager {
     private GroupHelper groupsHelper;
     private ContactHelper contactsHelper;
     private String browser;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser)  {
         properties = new Properties();
         this.browser = browser;
     }
+
+
+    public DbHelper db(){
+        return  dbHelper;
+    }
+
+
 
     public static boolean isAlertPresent(ChromeDriver wd) {
         try {
@@ -77,6 +85,7 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login(properties.getProperty("web.adminLogin"),properties.getProperty("web.adminPassword"));
+        dbHelper = new DbHelper();
 }
 
     private void login(String username, String password) {

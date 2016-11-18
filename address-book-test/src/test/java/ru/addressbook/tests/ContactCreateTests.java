@@ -43,14 +43,14 @@ public class ContactCreateTests extends TestBase {
     @Test (dataProvider = "validContacts")
     public void createContact(ContactData contact) {
         app.contact().ContactPage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.contact().initCreationContact();
 
          app.contact().fillFormContact(contact,true);
         app.contact().submitCreationContact();
         app.goTo().gotoHomePage();
         Assert.assertEquals(app.contact().count(), before.size()+1);
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(
                 before.withAdded(contact.withIdC(after.stream().mapToInt((g) -> g.getIdC()).max().getAsInt()))));

@@ -16,22 +16,22 @@ import static org.testng.Assert.assertEquals;
 public class GroupDeleteTests extends TestBase {
 
     @BeforeMethod
-   // public void enshurePreconditoin() {
-     //   app.goTo().groupPage();
-      //  if (! app.group().isThereGroup()) {
-      //      app.group().createGroup(new GroupData().withName("test1"));
-      //      app.goTo().gotoHomePage();
-      //  }
-   // }
+    public void enshurePreconditoin() {
+      app.goTo().groupPage();
+        if (app.db().groups().size() == 0){
+          app.group().createGroup(new GroupData().withName("test1"));
+           app.goTo().gotoHomePage();
+        }
+    }
 
     @Test
     public void delete() {
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData deletedGroup = before.iterator().next();
         app.group().deleteGroup(deletedGroup);
         assertThat(app.group().getGroupCount(),equalTo(before.size() - 1));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
 
 

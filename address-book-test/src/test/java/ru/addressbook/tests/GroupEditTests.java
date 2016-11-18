@@ -29,12 +29,12 @@ public void enshurePreconditoin() {
     @Test
     public void testModificationGroup(){
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData editdedGroup = before.iterator().next();
         GroupData group = new GroupData().withId(editdedGroup.getId()).withName("test2");
         app.group().editGroup(group);
         assertThat(app.group().getGroupCount(),equalTo(before.size()));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
         before.remove(editdedGroup);
         before.add(group);
