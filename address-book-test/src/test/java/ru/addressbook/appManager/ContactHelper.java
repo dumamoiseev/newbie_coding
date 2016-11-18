@@ -33,18 +33,15 @@ public class ContactHelper extends HelperBase {
 
     }
     public void fillFormContact(ContactData contactData, boolean creation) {
-        type(By.name("firstname"), contactData.getFirstname());
-        type(By.name("middlename"), contactData.getMiddlename());
-        type(By.name("lastname"), contactData.getLastname());
-        type(By.name("nickname"), contactData.getNickname());
-        type(By.name("company"), contactData.getCompanyname());
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("middlename"), contactData.getMiddleName());
+        type(By.name("lastname"), contactData.getLastName());
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobilePhone());
         type(By.name("email"), contactData.getEmail());
-        type(By.name("photo"),contactData.getPhoto().getAbsolutePath());
 
         if (creation){
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
         }
         else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -94,8 +91,8 @@ public class ContactHelper extends HelperBase {
         pickToEditContact(idC);
         fillFormContact(new ContactData()
                 .withIdC(contact.getIdC())
-                .withFirstname(contact.getFirstname())
-                .withLastname(contact.getLastname()),false);
+                .withFirstName(contact.getFirstName())
+                .withLastName(contact.getLastName()),false);
         confirmEditingContact();
         contactCache = null;
     }
@@ -129,8 +126,8 @@ public class ContactHelper extends HelperBase {
             int id  = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             ContactData contact = new ContactData()
                     .withIdC(id)
-                    .withLastname(cells.get(1).getText())
-                    .withFirstname(cells.get(2).getText())
+                    .withLastName(cells.get(1).getText())
+                    .withFirstName(cells.get(2).getText())
                     .withAddress(cells.get(3).getText())
                     .withAllEmails(cells.get(4).getText())
                     .withAllPhones(cells.get(5).getText());
@@ -158,11 +155,11 @@ public class ContactHelper extends HelperBase {
                 wd.navigate().back();
                 return new ContactData()
                                 .withIdC(contact.getIdC())
-                                .withFirstname(firstname)
-                                .withLastname(lastname)
-                                .withMiddlename(middlename)
+                                .withFirstName(firstname)
+                                .withLastName(lastname)
+                                .withMiddleName(middlename)
                                 .withAddress(address)
-                                .withEmail1(email)
+                                .withEmail(email)
                                 .withEmail2(email2)
                                 .withEmail3(email3)
                                 .withHomePhone(home)
@@ -175,17 +172,25 @@ public class ContactHelper extends HelperBase {
 
 
 
-
     public void viewAllContactInfoById(int id) {
             wd.findElement(By.cssSelector("a[href='view.php?id=" + id + "']")).click();
           }
 
+    public int selectContactToGroup() {
+                WebElement group = wd.findElements(By.xpath("//select[@name = 'to_group']/option")).iterator().next();
+                group.click();
+                return  Integer.parseInt(group.getAttribute("value"));
+            }
 
-    public ContactData infoFromFullInfoPage(ContactData contact) {
-            viewAllContactInfoById(contact.getIdC());
-            String allInfo = wd.findElement(By.id("content")).getText();
-            wd.navigate().back();
-            return new ContactData().withAllInfo(allInfo);
-          }
 
-}
+    public void selectGroup(int id) {
+                wd.findElement(By.xpath("//select[@name = 'group']/option[@value ='"+id+"']")).click();
+            }
+
+            public void addContactToGroup() {
+                wd.findElement(By.xpath("//input[@name = 'add']")).click();
+           }
+    public void removeFromGroup() {
+               wd.findElement(By.xpath("//input[@name = 'remove']")).click();
+           }
+    }

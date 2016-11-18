@@ -30,7 +30,7 @@ import java.util.Arrays;
               }
           }
 
-          @Test
+          @Test()
   public void testContactEmails() {
             ContactData contact = app.contact().all().iterator().next();
            ContactData contactInfoFromFullInfoPage = app.contact().infoFromFullInfoPage(contact);

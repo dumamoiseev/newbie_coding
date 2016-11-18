@@ -43,8 +43,8 @@ public class GroupHelper extends HelperBase {
     }
 
     public void fillFormGroup(GroupData dataGroup) {
-        type(By.name("group_name"), dataGroup.getParameter1());
-        type(By.name("group_footer"), dataGroup.getParameter2());
+        type(By.name("group_name"), dataGroup.getName());
+        type(By.name("group_footer"), dataGroup.getFooter());
     }
 
     public void initGroupCreation() {

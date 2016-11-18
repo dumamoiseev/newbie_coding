@@ -50,6 +50,29 @@ public class DbHelper {
         session.close();
         return new Contacts(result);
     }
+    public ContactData loadContactById(int id) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        ContactData contactData = session.byId(ContactData.class).load(id);
+
+        session.getTransaction().commit();
+        session.close();
+
+        return contactData;
+    }
+    public List<GroupData> groupsWithContacts() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        String sql = "select distinct gl.* from address_in_groups aig join group_list gl on aig.group_id = gl.group_id ";
+        List<GroupData> result = session.createNativeQuery(sql, GroupData.class).list();
+        for (GroupData id : result) {
+            System.out.println(id);
+        }
+        session.getTransaction().commit();
+        session.close();
+        return  result;
+    }
 }
 
 
